@@ -166,7 +166,7 @@ class CloudflareConnection
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
 
-        if (curl_errno($ch)) {
+        if (false === $ch || curl_errno($ch)) {
             return null;
         }
 
