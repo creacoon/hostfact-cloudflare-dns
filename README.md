@@ -1,5 +1,6 @@
 # Hostfact module for Cloudflare DNS management
 
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![StyleCI](https://styleci.io/repos/189969610/shield?branch=master)](https://styleci.io/repos/189969610)
 [![Quality Score](https://img.shields.io/scrutinizer/g/creacoon/hostfact-cloudflare-dns.svg?style=flat-square)](https://scrutinizer-ci.com/g/creacoon/hostfact-cloudflare-dns)
 
