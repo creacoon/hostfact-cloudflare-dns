@@ -29,30 +29,32 @@ class CloudflareConnection
     {
         $user = $this->currentUser();
 
-        if ($user && $user['success'] === true) {
-            return true;
-        }
-
-        return false;
+        return $user && $user['success'] === true;
     }
 
     /**
      * @return array
      */
-    public function currentUser(): array
+    public function currentUser(): ?array
     {
         return $this->apiCall('user');
     }
 
     /**
-     * @return array
+     * @return array|null
      */
-    public function current(): array
+    public function current(): ?array
     {
         return $this->apiCall('user');
     }
 
-    public function getDnsRecordsForZone(string $id, array $parameters)
+    /**
+     * @param string $id
+     * @param array  $parameters
+     *
+     * @return array|null
+     */
+    public function getDnsRecordsForZone(string $id, array $parameters): ?array
     {
         $parameters['per_page'] = 100;
         $query_string = http_build_query($parameters);
@@ -63,9 +65,9 @@ class CloudflareConnection
     /**
      * @param array $parameters
      *
-     * @return array
+     * @return array|null
      */
-    public function getZones(array $parameters): array
+    public function getZones(array $parameters): ?array
     {
         return $this->apiCall('zones?'.http_build_query($parameters));
     }
@@ -73,9 +75,9 @@ class CloudflareConnection
     /**
      * @param string $domain
      *
-     * @return array
+     * @return array|null
      */
-    public function createZone(string $domain, string $accountId): array
+    public function createZone(string $domain, string $accountId): ?array
     {
         $data = [
             'name'       => $domain,
@@ -90,9 +92,9 @@ class CloudflareConnection
     /**
      * @param string $zoneId
      *
-     * @return array
+     * @return array|null
      */
-    public function deleteZone(string $zoneId): array
+    public function deleteZone(string $zoneId): ?array
     {
         return $this->apiCall('zones/'.$zoneId, 'DELETE');
     }
@@ -102,9 +104,9 @@ class CloudflareConnection
      * @param string $id
      * @param array  $data
      *
-     * @return array
+     * @return array|null
      */
-    public function createDnsRecord(string $zoneId, array $data): array
+    public function createDnsRecord(string $zoneId, array $data): ?array
     {
         return $this->apiCall('zones/'.$zoneId.'/dns_records', 'POST', $data);
     }
@@ -114,9 +116,9 @@ class CloudflareConnection
      * @param string $id
      * @param array  $data
      *
-     * @return array
+     * @return array|null
      */
-    public function updateDnsRecord(string $zoneId, string $id, array $data): array
+    public function updateDnsRecord(string $zoneId, string $id, array $data): ?array
     {
         return $this->apiCall('zones/'.$zoneId.'/dns_records/'.$id, 'PUT', $data);
     }
@@ -125,9 +127,9 @@ class CloudflareConnection
      * @param string $zoneId
      * @param string $id
      *
-     * @return array
+     * @return array|null
      */
-    public function deleteDnsRecord(string $zoneId, string $id): array
+    public function deleteDnsRecord(string $zoneId, string $id): ?array
     {
         return $this->apiCall('zones/'.$zoneId.'/dns_records/'.$id, 'DELETE');
     }
@@ -168,7 +170,7 @@ class CloudflareConnection
             return null;
         }
 
-        $data = curl_exec($ch);
+        $response = curl_exec($ch);
 
         if ($this->debug) {
             $info = curl_getinfo($ch);
@@ -177,6 +179,6 @@ class CloudflareConnection
 
         curl_close($ch);
 
-        return json_decode($data, true);
+        return json_decode($response, true);
     }
 }
