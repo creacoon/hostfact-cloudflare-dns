@@ -3,7 +3,7 @@
 $version['name'] = 'Cloudflare';
 $version['api_version'] = '4.0';
 $version['date'] = '2019-06-01';
-$version['wefact_version'] = '5.1';
+$version['version'] = '1.0';
 
 // Information for customer (will be showed at DNS-management-show-page)
 $version['dev_logo'] = 'https://creacoon.nl/images/logo_100h.png'; // URL to your logo
