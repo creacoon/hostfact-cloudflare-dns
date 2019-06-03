@@ -1,0 +1,6 @@
+<?php
+
+$username = '';
+$api_key = '';
+$account_id = '';
+$test_domain_creation_on = ''; // Domain that will be used to test Zone creation
