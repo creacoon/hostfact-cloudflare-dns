@@ -77,7 +77,7 @@ class cloudflare
 
         $zone = $cloudflare_connection->createZone($domain, $this->Settings->account_id);
 
-        if ($zone['result'] === success) {
+        if ($zone['success'] === true) {
             return $this->saveDNSZone($domain, $dns_zone);
         }
 
@@ -171,6 +171,7 @@ class cloudflare
                 }
 
                 foreach ($dns_zone['records'] as $record) {
+                    $cf_record = [];
                     $cf_record['name'] = $record['name'];
                     $cf_record['type'] = $record['type'];
                     $cf_record['content'] = $record['value'];
