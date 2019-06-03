@@ -145,6 +145,10 @@ class CloudflareConnection
     {
         $ch = curl_init();
 
+        if (false === $ch) {
+            return null;
+        }
+
         $request_headers = [
             'X-Auth-Email: '.$this->username,
             'X-Auth-Key: '.$this->api_key,
@@ -166,7 +170,7 @@ class CloudflareConnection
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $request_headers);
 
-        if (false === $ch || curl_errno($ch)) {
+        if (curl_errno($ch)) {
             return null;
         }
 
