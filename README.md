@@ -40,7 +40,7 @@ If you discover any security related issues, please email support@creacoon.nl in
 
 You're free to use this package, but if it makes it to your production environment we highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using.
 
-Our address is: Creacoon, Pasweg 11, 6097NJ Heel, The Netherlands.
+Our address is: Creacoon, Aziëstraat 15, 6014 DA Ittervoort, The Netherlands.
 
 ## Credits
 
